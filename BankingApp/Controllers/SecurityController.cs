@@ -46,6 +46,9 @@ namespace BankingApp.Controllers
 
         public async Task<IActionResult> Logout()
         {
+            Console.WriteLine(HttpContext.User);
+            Console.WriteLine(HttpContext.User.Identity);
+            Console.WriteLine(HttpContext.User.Identity.IsAuthenticated);
             await HttpContext.SignOutAsync(
                     scheme: "FiverSecurityScheme");
 

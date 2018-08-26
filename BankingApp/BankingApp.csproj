@@ -15,4 +15,7 @@
   <ItemGroup>
     <Content Remove="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\AccountController.cs" />
+  </ItemGroup>
 </Project>
