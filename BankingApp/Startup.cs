@@ -13,11 +13,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BankingApp.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
-
+using Microsoft.Extensions.Caching.Memory;
+using BankingApp.Utility;
 namespace BankingApp
 {
     public class Startup
     {
+        public static IMemoryCache _cache;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -35,7 +37,11 @@ namespace BankingApp
                   options.AccessDeniedPath = new PathString("/Security/Access");
                   options.LoginPath = new PathString("/Security/Login");
               });
-
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time
+            });
+            RegisteredUsers.Users = new List<User>(); 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -55,14 +61,13 @@ namespace BankingApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
-            app.UseAuthentication();
-
+            app.UseSession();
+            app.UseAuthentication(); 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Security}/{action=Login}/{id?}");
             });
         }
     }

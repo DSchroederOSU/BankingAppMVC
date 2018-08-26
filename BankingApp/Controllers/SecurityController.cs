@@ -6,28 +6,44 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BankingApp.Models;
 using Microsoft.AspNetCore.Authentication;
+using BankingApp.Utility;
+using Microsoft.AspNetCore.Http;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BankingApp.Controllers
 {
     public class SecurityController : Controller
-    {
-        public IActionResult Login()
+    { 
+        public SecurityController()
         {
+
+        }
+
+        public IActionResult Login()
+        { 
             return View();
+        }
+
+        public IActionResult Register()
+        { 
+            return View("./Register");
         }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginInputModel inputModel)
-        {
-            if (!IsAuthentic(inputModel.Username, inputModel.Password))
+        { 
+            if (!IsAuthentic(inputModel.Email, inputModel.Password))
+            {
+                TempData["headermsg"] = "<div id='alertMessage' class='alert alert-danger w-100 h-100' role='alert'>Invalid Credentials.</div> ";
                 return View();
+            }
 
             // create claims  
             List<Claim> claims = new List<Claim>
+
             {
-              new Claim(ClaimTypes.Name, "Sean Connery"),
-              new Claim(ClaimTypes.Email, inputModel.Username)
+                new Claim(ClaimTypes.Name, inputModel.Email),
+                new Claim(ClaimTypes.Email, inputModel.Email)
             };
 
             // create identity  
@@ -39,16 +55,21 @@ namespace BankingApp.Controllers
             // sign-in  
             await HttpContext.SignInAsync(
                     scheme: "FiverSecurityScheme",
-                    principal: principal);
+                    principal: principal); 
+            return RedirectToAction("Index", "Home", new { email = inputModel.Email });
+        }
 
-            return RedirectToAction("Index", "Home");
+        [HttpPost]
+        public  IActionResult Register(RegisterInputModel inputModel, string submit)
+        { 
+            RegisterUser(inputModel);
+            TempData["headermsg"] = "<div id='alertMessage' class='alert alert-success w-100 h-100' role='alert'>Registration Successful.</div> ";
+            return View("Login");
+
         }
 
         public async Task<IActionResult> Logout()
-        {
-            Console.WriteLine(HttpContext.User);
-            Console.WriteLine(HttpContext.User.Identity);
-            Console.WriteLine(HttpContext.User.Identity.IsAuthenticated);
+        { 
             await HttpContext.SignOutAsync(
                     scheme: "FiverSecurityScheme");
 
@@ -57,9 +78,37 @@ namespace BankingApp.Controllers
 
         #region " Private "
 
-        private bool IsAuthentic(string username, string password)
+        private bool IsAuthentic(string email, string password)
+        { 
+            if (HttpContext.Session.GetObjectFromJson<List<User>>("RegisteredUsers")
+                .Find((User obj) => obj.Email == email && obj.Password == password) != null)
+                return true;
+            return false;
+        }
+
+        private void CreateUserLogininput(string username, string password)
         {
-            return (username == "james" && password == "bond");
+            User NewUser = new User
+            {
+                Email = username,
+                Password = password
+            };
+            RegisteredUsers.Users.Add(NewUser);
+            HttpContext.Session.SetObjectAsJson("RegisteredUsers", RegisteredUsers.Users);
+        }
+
+        private void RegisterUser(RegisterInputModel inputModel){
+            User NewUser = new User
+            {
+                FirstName = inputModel.FirstName,
+                LastName = inputModel.LastName,
+                Email = inputModel.Email,
+                Password = inputModel.Password,
+                Transactions = new List<Transaction>(),
+                NewTransaction = new Transaction()
+            };
+            RegisteredUsers.Users.Add(NewUser);
+            HttpContext.Session.SetObjectAsJson("RegisteredUsers", RegisteredUsers.Users);
         }
 
         #endregion

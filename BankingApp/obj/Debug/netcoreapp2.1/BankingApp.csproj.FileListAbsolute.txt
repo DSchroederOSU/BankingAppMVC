@@ -18,6 +18,8 @@
 /Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/Razor/Views/Home/Contact.g.cshtml.cs
 /Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/Razor/Views/Home/Index.g.cshtml.cs
 /Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/Razor/Views/Home/Privacy.g.cshtml.cs
+/Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/Razor/Views/Security/Login.g.cshtml.cs
+/Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/Razor/Views/Security/Register.g.cshtml.cs
 /Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/Razor/Views/Shared/Error.g.cshtml.cs
 /Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/Razor/Views/Shared/_CookieConsentPartial.g.cshtml.cs
 /Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/Razor/Views/Shared/_Layout.g.cshtml.cs
@@ -30,5 +32,3 @@
 /Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/BankingApp.dll
 /Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/BankingApp.pdb
 /Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/BankingApp.csproj.CopyComplete
-/Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/Razor/Views/Account/Register.g.cshtml.cs
-/Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/Razor/Views/Security/Login.g.cshtml.cs
