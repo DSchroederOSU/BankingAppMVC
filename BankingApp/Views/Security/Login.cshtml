@@ -1,6 +1,9 @@
 ﻿<div id="messageDiv" class="row mb-2" style="height: 50px;">
     @Html.Raw(TempData["headermsg"])
 </div>
+<div id="headerBanner" class="row mb-2 pl-3" style="height: 50px;">
+    <h1>Welcome to the BankApp</h1>
+</div>
 <div class="row mb-2">
     <div class="col-md-6">
         <form asp-controller="Security" asp-action="Login" method="post">
@@ -19,8 +22,13 @@
             <button type="submit" name="submit" value="Login" class="btn btn-primary">Login</button>
         </form>
         <hr size=2 class="mt-5">
-        <b>or register an Account</b><br/>
-        <input type="button" class="btn btn-primary" value="Register" onclick="location.href='@Url.Action("Register", "Security")'" />
+        or<a href="@Url.Action("Register", "Security")" ><b> Register a New Account</b></a> 
  
     </div> 
 </div>
+<script language="javascript" type="text/javascript">
+     
+    setTimeout(function() {
+        $('#alertMessage').fadeOut('fast');
+    }, 2000);
+</script>

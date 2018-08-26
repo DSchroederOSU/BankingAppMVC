@@ -17,9 +17,12 @@
   <ItemGroup>
     <Content Remove="Views\Shared\_LoginPartial.cshtml" />
     <Content Remove="wwwroot\lib\jquery\dist\jquery.js" />
+    <Content Remove="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Controllers\AccountController.cs" />
+    <Compile Remove="Models\ErrorViewModel.cs" />
+    <Compile Remove="Models\ApplicationUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="wwwroot\lib\jquery\dist\jquery.js">

@@ -89,15 +89,15 @@ namespace BankingApp.Controllers
         {
             if (value < 0)
             {
-                TempData["errormsg"] = "<div id='alertMessage' class='alert alert-danger w-100' role='alert'>Please enter a positive value.</div> ";
+                TempData["errormsg"] = "<div id='alertMessage' class='alert alert-danger w-100 h-100' role='alert'>Please enter a positive value.</div> ";
                 return false;
             }
-            else if (value == 0)
+            else if (Math.Abs(value) < 0.001)
             {
-                TempData["errormsg"] = "<div id='alertMessage' class='alert alert-danger w-100' role='alert'>You cannot deposit a value of 0.</div> ";
+                TempData["errormsg"] = "<div id='alertMessage' class='alert alert-danger w-100 h-100' role='alert'>You cannot deposit a value of 0.</div> ";
                 return false;
             }
-            TempData["errormsg"] = "<div id='alertMessage' class='alert alert-success w-100' role='alert'>Deposit Successful.</div> ";
+            TempData["errormsg"] = "<div id='alertMessage' class='alert alert-success w-100 h-100' role='alert'>Deposit Successful.</div> ";
             return true;
         }
 
@@ -105,20 +105,20 @@ namespace BankingApp.Controllers
         {
             if (value < 0)
             {
-                TempData["errormsg"] = "<div id='alertMessage' class='alert alert-danger w-100' role='alert'>Please enter a positive value.</div> ";
+                TempData["errormsg"] = "<div id='alertMessage' class='alert alert-danger w-100 h-100' role='alert'>Please enter a positive value.</div> ";
                 return false;
             }
-            else if (value == 0)
+            else if (Math.Abs(value) < 0.001)
             {
-                TempData["errormsg"] = "<div id='alertMessage' class='alert alert-danger w-100' role='alert'>You cannot withdraw a value of 0.</div> ";
+                TempData["errormsg"] = "<div id='alertMessage' class='alert alert-danger w-100 h-100' role='alert'>You cannot withdraw a value of 0.</div> ";
                 return false;
             }
             else if (RunningBalance - value < 0)
             {
-                TempData["errormsg"] = "<div id='alertMessage' class='alert alert-danger w-100' role='alert'>You do not have enough funds for this withdrawl.</div> ";
+                TempData["errormsg"] = "<div id='alertMessage' class='alert alert-danger w-100 h-100' role='alert'>You do not have enough funds for this withdrawl.</div> ";
                 return false;
             }
-            TempData["errormsg"] = "<div id='alertMessage' class='alert alert-success w-100' role='alert'>Withdraw Successful.</div> ";
+            TempData["errormsg"] = "<div id='alertMessage' class='alert alert-success w-100 h-100' role='alert'>Withdraw Successful.</div> ";
             return true;
         }
     }

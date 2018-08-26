@@ -1,7 +1,7 @@
 ﻿@model BankingApp.Models.TransactionViewModel
-<div id="messageDiv" class="row mb-2 w-100" style="height: 50px;">
-        @Html.Raw(TempData["errormsg"])
-    </div>
+<div id="messageDiv" class="row mb-2" style="height: 50px;">
+    @Html.Raw(TempData["errormsg"])
+</div>
 <h2>Hello @User.Identity.Name</h2>
 <p>You've reached <strong>home</strong> page at @DateTime.Now.ToString()</p>
 
@@ -44,12 +44,13 @@
             $("input[type='text']").each(function(){
                $(this).attr("value","");
             });
-     
         }
         catch (e)
         { }
     });
      $('#transactionsDiv').animate({scrollTop: $('#transactionsDiv').prop("scrollHeight")}, 500);
 
-
+    setTimeout(function() {
+        $('#alertMessage').fadeOut('fast');
+    }, 2000);
 </script>
