@@ -1,7 +1,4 @@
 # BankingAppMVC
-
-Description:
-
 This was my first time implementing a C# web application. I used the Asp.NET Core 2.0 MVC framework to implement this solution.
 
 # Data Store
@@ -28,6 +25,6 @@ Additionally, I was able to capitalize on the .NET Core HttpContext User Identit
     }
 ```
 # Difficulties
-
+First and foremost, the largest difficulty for this project was the learning curve involved with implementing a C# application for the first time. 
 
 # Things I Learned
