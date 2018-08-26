@@ -1,5 +1,19 @@
 # BankingAppMVC
 This was my first time implementing a C# web application. I used the Asp.NET Core 2.0 MVC framework to implement this solution.
+# Assignment Criteria
+You have been tasked with writing the world’s greatest banking ledger. Please code a solution that can perform the following workflows through a console application (accessed via the command line):
+
+- Create a new account
+- Login
+- Record a deposit
+- Record a withdrawal
+- Check balance
+- See transaction history
+- Log out
+
+For additional credit, you may implement this through a web page. They don’t have to run at the same time, but if you would like to do that, feel free.
+
+C# is preferred but not required. Use whatever frameworks/libraries you wish, and just make sure they are included or available via via NuGet/npm/etc. Please use a temporary memory store (local cache) instead of creating an actual database, and don't spend much time on the UI (unless you love doing that).
 
 # Data Store
 For local data store I used the [HttpContext.Session](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httpcontext.session?view=aspnetcore-2.1) as a means to store data and share between application controllers. I was able to serialize complex objects into JSON and deserialize when updating data models. I used serializer methods found [here](https://github.com/NeelBhatt/DotNetCoreSessionSample/blob/master/NeelSessionExample/Utility/SessionExtension.cs) which could convert complex object to JSON and deserialize from JSON back to a usable object. This proved helpful for adding new Transactions to the RegisteredUser class as the user completed withdraw and deposit actions.
