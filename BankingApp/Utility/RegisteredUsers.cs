@@ -25,5 +25,5 @@ namespace BankingApp.Utility
     {
         public double Amount { get; set; }
         public string Type { get; set; }
-}
+    }
 }

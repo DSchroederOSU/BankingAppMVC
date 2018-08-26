@@ -31,8 +31,8 @@ namespace BankingApp
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddAuthentication("FiverSecurityScheme")
-              .AddCookie("FiverSecurityScheme", options =>
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+              .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
               {
                   options.AccessDeniedPath = new PathString("/Security/Access");
                   options.LoginPath = new PathString("/Security/Login");

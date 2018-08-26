@@ -8,6 +8,7 @@ using BankingApp.Models;
 using Microsoft.AspNetCore.Authentication;
 using BankingApp.Utility;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.Cookies;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BankingApp.Controllers
@@ -54,7 +55,7 @@ namespace BankingApp.Controllers
 
             // sign-in  
             await HttpContext.SignInAsync(
-                    scheme: "FiverSecurityScheme",
+                    scheme: CookieAuthenticationDefaults.AuthenticationScheme,
                     principal: principal); 
             return RedirectToAction("Index", "Home");
         }
@@ -71,7 +72,7 @@ namespace BankingApp.Controllers
         public async Task<IActionResult> Logout()
         { 
             await HttpContext.SignOutAsync(
-                    scheme: "FiverSecurityScheme");
+                    scheme: CookieAuthenticationDefaults.AuthenticationScheme);
 
             return RedirectToAction("Login");
         }
