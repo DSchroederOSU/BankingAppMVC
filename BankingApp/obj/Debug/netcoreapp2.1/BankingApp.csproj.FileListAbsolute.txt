@@ -32,3 +32,4 @@
 /Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/BankingApp.dll
 /Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/BankingApp.pdb
 /Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/BankingApp.csproj.CopyComplete
+/Users/DanielSchroederMac/Projects/BankingApp/BankingApp/obj/Debug/netcoreapp2.1/BankingApp.csprojAssemblyReference.cache

@@ -56,7 +56,7 @@ namespace BankingApp.Controllers
             await HttpContext.SignInAsync(
                     scheme: "FiverSecurityScheme",
                     principal: principal); 
-            return RedirectToAction("Index", "Home", new { email = inputModel.Email });
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -79,10 +79,13 @@ namespace BankingApp.Controllers
         #region " Private "
 
         private bool IsAuthentic(string email, string password)
-        { 
-            if (HttpContext.Session.GetObjectFromJson<List<User>>("RegisteredUsers")
-                .Find((User obj) => obj.Email == email && obj.Password == password) != null)
+        {
+            if(HttpContext.Session.GetObjectFromJson<List<User>>("RegisteredUsers") != null){
+                var CurrentUser = HttpContext.Session.GetObjectFromJson<List<User>>("RegisteredUsers")
+                        .Find((User obj) => obj.Email == email && obj.Password == password);
+                HttpContext.Session.SetObjectAsJson("CurrentUser", CurrentUser);
                 return true;
+            } 
             return false;
         }
 
@@ -104,8 +107,7 @@ namespace BankingApp.Controllers
                 LastName = inputModel.LastName,
                 Email = inputModel.Email,
                 Password = inputModel.Password,
-                Transactions = new List<Transaction>(),
-                NewTransaction = new Transaction()
+                Transactions = new List<Transaction>()
             };
             RegisteredUsers.Users.Add(NewUser);
             HttpContext.Session.SetObjectAsJson("RegisteredUsers", RegisteredUsers.Users);
