@@ -39,6 +39,9 @@ Additionally, I was able to capitalize on the .NET Core HttpContext User Identit
     }
 ```
 # Difficulties
-First and foremost, the largest difficulty for this project was the learning curve involved with implementing a C# application for the first time.
+First and foremost, the largest difficulty for this project was overcoming the learning curve involved with implementing a C# application for the first time. I needed to read through documentation and code examples to understand how .NET MVC worked and how to correctly implement all of the different features of the application.
+
+Additionally, finding a way to persist data throughout the application without a db data store proved difficult until I found out how to use [Session state](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/app-state?view=aspnetcore-2.1) to store user data. While this might not have been the ideal solution, it worked fine for the purpose of this application.
 
 # Things I Learned
+Everything.
