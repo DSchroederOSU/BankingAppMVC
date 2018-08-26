@@ -13,7 +13,6 @@ As this was my first time implementing a .NET Core web application, I used [Razo
 # Authentication
 For authentication, I implemented [Cookie Authentication](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-2.1&tabs=aspnetcore2x) with the default "CookieAuthenticationDefaults.AuthenticationScheme" as the authentication scheme. I was able to use the [SignInAsync](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.authentication.authenticationhttpcontextextensions.signinasync?view=aspnetcore-2.1) (an extension of [Microsoft.AspNetCore.Authentication](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.authentication?view=aspnetcore-2.1)) to perform a simple authentication operation and create an authorized user login. Then I added the Authorize tag to my entire main controller to ensure all routes required an authorized user.
 ```language=C#
-
     [Authorize]
     public class HomeController : Controller
     {
@@ -24,7 +23,8 @@ Additionally, I was able to capitalize on the .NET Core HttpContext User Identit
 ```language=C#
     @if (@User.Identity.IsAuthenticated)
     {
-       <input type="button" class="btn btn-danger" value="Logout" onclick="location.href='@Url.Action("Logout", "Security")'" />
+       <input type="button" class="btn btn-danger" value="Logout"
+              onclick="location.href='@Url.Action("Logout", "Security")'" />
     }
 ```
 # Difficulties
