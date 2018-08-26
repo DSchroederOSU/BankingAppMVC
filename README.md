@@ -5,9 +5,17 @@ This was my first time implementing a C# web application. I used the Asp.NET Cor
 For local data store I used the [HttpContext.Session](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httpcontext.session?view=aspnetcore-2.1) as a means to store data and share between application controllers. I was able to serialize complex objects into JSON and deserialize when updating data models. I used serializer methods found [here](https://github.com/NeelBhatt/DotNetCoreSessionSample/blob/master/NeelSessionExample/Utility/SessionExtension.cs) which could convert complex object to JSON and deserialize from JSON back to a usable object. This proved helpful for adding new Transactions to the RegisteredUser class as the user completed withdraw and deposit actions.
 
 # Field Validation
-I implemented a very simple data validation scheme to verify that the user submits valid deposit and withdraw values (i.e. not negative or values of 0). I also created a banner message that gets injected on validation error and tells the user what was wrong with the submission. This was done by using the [TempData](Controller.TempData Property) property in the controller to inject a string of HTML code that was rendered in the Razor View Page with
+I implemented a very simple data validation scheme to verify that the user submits valid deposit and withdraw values (i.e. not negative or values of 0). I also created a banner message that gets injected on validation error and tells the user what was wrong with the submission. This was done by using the [TempData](Controller.TempData Property) property in the controller to inject a string of HTML code that was rendered in the Razor View Page with:
 ```
  @Html.Raw(TempData["errormsg"])
+```
+Additionally, there was a JQuery script to fade the error message out after 2 seconds so the error banner did not persist:
+```language=JavaScript
+<script language="javascript" type="text/javascript">
+  setTimeout(function() {
+      $('#alertMessage').fadeOut('fast');
+  }, 2000);
+</script>
 ```
 
 # Front End
