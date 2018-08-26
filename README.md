@@ -4,6 +4,12 @@ This was my first time implementing a C# web application. I used the Asp.NET Cor
 # Data Store
 For local data store I used the [HttpContext.Session](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httpcontext.session?view=aspnetcore-2.1) as a means to store data and share between application controllers. I was able to serialize complex objects into JSON and deserialize when updating data models. I used serializer methods found [here](https://github.com/NeelBhatt/DotNetCoreSessionSample/blob/master/NeelSessionExample/Utility/SessionExtension.cs) which could convert complex object to JSON and deserialize from JSON back to a usable object. This proved helpful for adding new Transactions to the RegisteredUser class as the user completed withdraw and deposit actions.
 
+# Field Validation
+I implemented a very simple data validation scheme to verify that the user submits valid deposit and withdraw values (i.e. not negative or values of 0). I also created a banner message that gets injected on validation error and tells the user what was wrong with the submission. This was done by using the [TempData](Controller.TempData Property) property in the controller to inject a string of HTML code that was rendered in the Razor View Page with
+```
+ @Html.Raw(TempData["errormsg"])
+```
+
 # Front End
 As this was my first time implementing a .NET Core web application, I used [Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-2.1&tabs=visual-studio) as it was the default setting creating a new .NET Core MVC application in Visual Studio Community (Mac). Razor Pages allow for simple data binding by passing a Model to the view and updating Model attributes through different actions or web forms.
 
@@ -25,6 +31,6 @@ Additionally, I was able to capitalize on the .NET Core HttpContext User Identit
     }
 ```
 # Difficulties
-First and foremost, the largest difficulty for this project was the learning curve involved with implementing a C# application for the first time. 
+First and foremost, the largest difficulty for this project was the learning curve involved with implementing a C# application for the first time.
 
 # Things I Learned
