@@ -17,6 +17,7 @@ namespace BankingApp.Utility
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+
         public double AccountTotal { get; set; }
         public List<Transaction> Transactions { get; set; }
         public Transaction NewTransaction { get; set; }

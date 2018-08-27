@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.AspNetCore.Http;
 using BankingApp.Utility;
+using System.Globalization;
 
 namespace BankingApp.Controllers
 {
@@ -26,7 +27,8 @@ namespace BankingApp.Controllers
             {
                 UserTransactions = RegisteredUsers.Users.Find((User obj) => obj.Email == CurrentEmail).Transactions
             };
-            ViewData["RunningBalance"] = RegisteredUsers.Users.Find((User obj) => obj.Email == CurrentEmail).AccountTotal;
+            CultureInfo ci = new CultureInfo("en-us");
+            ViewData["RunningBalance"] = RegisteredUsers.Users.Find((User obj) => obj.Email == CurrentEmail).AccountTotal.ToString("C", ci);
             return View(viewModel);
         }
 
