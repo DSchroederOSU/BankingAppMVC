@@ -23,6 +23,7 @@
     <Compile Remove="Controllers\AccountController.cs" />
     <Compile Remove="Models\ErrorViewModel.cs" />
     <Compile Remove="Models\ApplicationUser.cs" />
+    <Compile Remove="Utility\CurrentUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="wwwroot\lib\jquery\dist\jquery.js">

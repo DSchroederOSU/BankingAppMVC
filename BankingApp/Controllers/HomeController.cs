@@ -16,20 +16,17 @@ namespace BankingApp.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        public static double RunningBalance = 12000.00;
-        public HomeController()
-        {
-        }
+        public static string CurrentEmail;
 
         public IActionResult Index( )
         {
-            ViewData["RunningBalance"] = RunningBalance;
-            Console.WriteLine(HttpContext.Session.GetObjectFromJson<User>("CurrentUser").Transactions.Count);
+            CurrentEmail = HttpContext.Session.GetString("CurrentUserEmail");
+            Console.WriteLine(CurrentEmail);
             var viewModel = new TransactionViewModel()
             {
-                UserTransactions = HttpContext.Session.GetObjectFromJson<User>("CurrentUser").Transactions
+                UserTransactions = RegisteredUsers.Users.Find((User obj) => obj.Email == CurrentEmail).Transactions
             };
-
+            ViewData["RunningBalance"] = RegisteredUsers.Users.Find((User obj) => obj.Email == CurrentEmail).AccountTotal;
             return View(viewModel);
         }
 
@@ -38,22 +35,20 @@ namespace BankingApp.Controllers
         {
             if (ValidateDeposit(model.Amount))
             {
-                User CurrentUser = HttpContext.Session.GetObjectFromJson<User>("CurrentUser");
+                User current = RegisteredUsers.Users.Find((User obj) => obj.Email == CurrentEmail);
+                Console.WriteLine(current.FirstName);
                 Transaction ToAdd = new Transaction
                 {
                     Amount = model.Amount,
                     Type = "Deposit"
                 };
-                CurrentUser.Transactions.Add(ToAdd);
-                HttpContext.Session.SetObjectAsJson("CurrentUser", CurrentUser);
-                RunningBalance = RunningBalance + ToAdd.Amount;
-                ViewData["RunningBalance"] = RunningBalance;
+                current.Transactions.Add(ToAdd);
+                current.AccountTotal = current.AccountTotal + ToAdd.Amount;  
                 ModelState.Clear();
                 return Redirect(Url.Content("~/Home/Index"));
             }
             else
-            {
-                ViewData["RunningBalance"] = RunningBalance;
+            { 
                 ModelState.Clear();
                 return Redirect(Url.Content("~/Home/Index"));
             }
@@ -62,24 +57,22 @@ namespace BankingApp.Controllers
         [HttpPost]
         public ActionResult Withdraw(TransactionViewModel model)
         {
-            if (ValidateWithdraw(model.Amount))
+            User current = RegisteredUsers.Users.Find((User obj) => obj.Email == CurrentEmail);
+            if (ValidateWithdraw(model.Amount, current.AccountTotal))
             {
-                User CurrentUser = HttpContext.Session.GetObjectFromJson<User>("CurrentUser");
+               
                 Transaction ToAdd = new Transaction
                 {
                     Amount = model.Amount,
                     Type = "Withdraw"
                 };
-                CurrentUser.Transactions.Add(ToAdd);
-                HttpContext.Session.SetObjectAsJson("CurrentUser", CurrentUser);
-                RunningBalance = RunningBalance - ToAdd.Amount;
-                ViewData["RunningBalance"] = RunningBalance;
+                current.Transactions.Add(ToAdd);
+                current.AccountTotal = current.AccountTotal - ToAdd.Amount;
                 ModelState.Clear();
                 return Redirect(Url.Content("~/Home/Index"));
             }
             else
-            {
-                ViewData["RunningBalance"] = RunningBalance;
+            { 
                 ModelState.Clear();
                 return Redirect(Url.Content("~/Home/Index"));
             }
@@ -101,7 +94,7 @@ namespace BankingApp.Controllers
             return true;
         }
 
-        public bool ValidateWithdraw(double value)
+        public bool ValidateWithdraw(double value, double total)
         {
             if (value < 0)
             {
@@ -113,7 +106,7 @@ namespace BankingApp.Controllers
                 TempData["errormsg"] = "<div id='alertMessage' class='alert alert-danger w-100 h-100' role='alert'>You cannot withdraw a value of 0.</div> ";
                 return false;
             }
-            else if (RunningBalance - value < 0)
+            else if (total - value < 0)
             {
                 TempData["errormsg"] = "<div id='alertMessage' class='alert alert-danger w-100 h-100' role='alert'>You do not have enough funds for this withdrawl.</div> ";
                 return false;

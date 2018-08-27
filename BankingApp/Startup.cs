@@ -41,7 +41,7 @@ namespace BankingApp
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time
             });
-            RegisteredUsers.Users = new List<User>(); 
+            RegisteredUsers.Users = new List<User>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
