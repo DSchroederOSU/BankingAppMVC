@@ -15,6 +15,9 @@ For additional credit, you may implement this through a web page. They don’t h
 
 C# is preferred but not required. Use whatever frameworks/libraries you wish, and just make sure they are included or available via via NuGet/npm/etc. Please use a temporary memory store (local cache) instead of creating an actual database, and don't spend much time on the UI (unless you love doing that).
 
+# Running the Web App
+Open the .sln (solution) file in Visual Studios and then click Run > Start Without Debugging
+
 # Data Store
 For local data store I used the [HttpContext.Session](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httpcontext.session?view=aspnetcore-2.1) as a means to store data and share between application controllers. I was able to serialize complex objects into JSON and deserialize when updating data models. I used serializer methods found [here](https://github.com/NeelBhatt/DotNetCoreSessionSample/blob/master/NeelSessionExample/Utility/SessionExtension.cs) which could convert complex object to JSON and deserialize from JSON back to a usable object. This proved helpful for adding new Transactions to the RegisteredUser class as the user completed withdraw and deposit actions.
 
